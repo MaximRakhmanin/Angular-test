@@ -1,0 +1,7 @@
+.books{
+    margin: 15px;
+}
+.detail:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}

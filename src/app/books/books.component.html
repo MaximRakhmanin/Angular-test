@@ -1,0 +1,46 @@
+
+<div class="container">
+  <div class="row">
+    <form class="form-inline">
+      <div class="form-group" [formGroup]="bookForm">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" name="title" id="title" placeholder="title" [(ngModel)]="book.title" formControlName="title">
+      </div>
+      <div class="form-group" [formGroup]="bookForm">
+        <label for="price">Price:</label>
+        <input type="text" class="form-control" name="price" id="price" [(ngModel)]="book.price" formControlName="price">
+      </div>
+      <div class="form-group" [formGroup]="bookForm">
+        <label for="pubYear">Publication Year:</label>
+        <input type="date" class="form-control" name="pubYear" id="pubYear" [(ngModel)]="book.publicationYear" formControlName="date">
+      </div>
+      <div class="form-group" [formGroup]="bookForm">
+        <input type="file" name="image" formControlName="image" (change)="onChengeImage($event)">
+      </div>
+        <div class="form-group">
+        <label for="categoryId">Category:</label>
+        <select class="form-control" id="categoryId" name="categoryId" [(ngModel)]="book.category_id">
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.description }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" (click)="create($event)" [disabled]="!bookForm.valid">Create</button>
+      </div>
+    </form>
+    <div [hidden]="!errors" class="alert alert-danger" *ngFor="let error of errors">{{ error.message }}</div>
+    <div [hidden]="!success" class="alert alert-success">{{ success }}</div>
+  </div>
+  <div *ngIf="books" class="row">
+    <div class="d-flex align-content-start flex-wrap books" *ngFor="let book of books">
+      <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+        <div routerLink="/books/{{ book.id }}" class="detail">
+          <div class="card-header bg-success">{{ book.title }}</div>
+          <div class="card-body">
+            <h5 class="card-title">Price: {{ book.price}}$</h5>
+         </div>
+        </div>
+        <button class="btn btn-danger" (click)="delete(book.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

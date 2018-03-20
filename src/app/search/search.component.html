@@ -1,0 +1,11 @@
+<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" #search [(ngModel)]="valueSearch" (keyup)="getBooks()">
+</form>
+<div *ngIf="searchResult" class="search">
+  <!--<ul>-->
+      <!--<li *ngFor="let book of searchResult">{{ book.title }}</li>-->
+  <!--</ul>-->
+  <div class="list-group take" id="list-tab" role="tablist">
+    <a class="list-group-item list-group-item-action  bg-dark text-light" id="list-home-list" data-toggle="list" role="tab" (click)="clickSearch(book.id, search)" *ngFor="let book of searchResult">{{ book.title }}</a>
+  </div>
+</div>
